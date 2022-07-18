@@ -1,17 +1,24 @@
 // import logo from './logo.svg';
 import "./App.css";
 import SignIn from "./Components/Signin";
-import { store } from "./Redux/configStore";
-import { Provider } from "react-redux";
+import Users from "./Components/Users";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Provider store={store}>
-        <header className="App-header">
-          <SignIn />
-        </header>
-      </Provider>
+      {/* <header className="App-header">  
+        </header> */}
+        <Routes>
+        <Route
+        path="/signin"
+        element={ <SignIn />}
+      />
+        <Route
+        path="/users"
+        element={ <Users />}
+      />
+        </Routes>
     </div>
   );
 }
