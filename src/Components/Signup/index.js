@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  Avatar,
   Button,
   Grid,
   Paper,
@@ -8,19 +7,66 @@ import {
   Typography,
   Link,
 } from "@material-ui/core";
-import { useNavigate } from 'react-router-dom';
-import logoCGI from '../../Assets/CGI_logo.png'
-
+import { useNavigate } from "react-router-dom";
+import logoCGI from "../../Assets/CGI_logo.png";
+import { isValidEmail, isValidPassWord } from "../../Validation";
+import {
+  requiredMessage,
+  emailNotValid,
+  invalidePassword,
+} from "../../Constants/ErrorMessages";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import IconButton from "@material-ui/core/IconButton";
+import { onRegister } from "../../Redux/Actions/JWTAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { AlertComponent } from "../CommunComponents/AlertComponent";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
+  const { status } = useSelector(({ alertReducer }) => alertReducer);
+
+
   const handleLinkClick = () => {
     navigate("/signin");
   };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleSubmit = () => {
-    console.log('fffff');
-  }
+    if (!email) {
+      setEmailError(requiredMessage);
+    } else if (!isValidEmail(email)) {
+      setEmailError(emailNotValid);
+    } else if (!password) {
+      setPasswordError(requiredMessage);
+    } else if (!isValidPassWord(password)) {
+      setPasswordError(invalidePassword);
+    } else {
+      dispatch(onRegister({ email, password }));
+    }
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const _handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
 
   return (
     <div className="signin">
@@ -32,10 +78,11 @@ const SignUp = () => {
       >
         <Grid item sx={6} sm={5} md={3}>
           <Paper elevation={10} className="paper">
-            <Grid align="center" style={{marginTop:"30px"}}>
-              <img src={logoCGI} alt="logoCGI" width={'60px'}/>
+            <Grid align="center" style={{ marginTop: "30px" }}>
+              <img src={logoCGI} alt="logoCGI" width={"60px"} />
               <h2>Créer un compte</h2>
             </Grid>
+            {status && <AlertComponent />}
             <TextField
               style={{ margin: "1em auto 2em" }}
               required
@@ -44,15 +91,42 @@ const SignUp = () => {
               variant="outlined"
               placeholder="Entrer votre email"
               fullWidth
+              onChange={(event) => {
+                setEmail(event.target.value.trim());
+                setEmailError("");
+              }}
+              error={emailError}
+              helperText={emailError}
+              onKeyPress={(event) => _handleKeyPress(event)}
             />
             <TextField
               required
-              type="password"
               id="password"
+              type={showPassword ? "text" : "password"}
               label="Mot de passe"
               variant="outlined"
               placeholder="Entrer votre mot de passe"
               fullWidth
+              onKeyPress={(event) => _handleKeyPress(event)}
+              onChange={(event) => {
+                setPassword(event.target.value);
+                setPasswordError("");
+              }}
+              error={passwordError}
+              helperText={passwordError}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <Button
@@ -61,14 +135,15 @@ const SignUp = () => {
               color="primary"
               fullWidth
               variant="contained"
-              onClick={handleSubmit()}
+              onClick={handleSubmit}
             >
               Registre
             </Button>
 
             <Typography>
               {" "}
-              Je suis déjà membre ? <Link onClick={handleLinkClick}>Se connecter</Link>
+              Je suis déjà membre ?{" "}
+              <Link onClick={handleLinkClick}>Se connecter</Link>
             </Typography>
           </Paper>
         </Grid>
