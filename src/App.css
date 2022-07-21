@@ -25,10 +25,12 @@
 
 }
 .paper {
+  
   padding: 20px;
-  height: 55vh;
-  width: 23vW;
+  /* height: 55%;
+  width: 23vW; */
   border-radius: 20px;
+  /* margin-top: 50%; */
   
 }
 .btStyle{

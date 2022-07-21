@@ -8,16 +8,20 @@ import {
   Typography,
   Link,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { useNavigate } from 'react-router-dom';
+import logoCGI from '../../Assets/CGI_logo.png'
 
-const SignIn = () => {
+
+const SignUp = () => {
   const navigate = useNavigate();
   const handleLinkClick = () => {
-    navigate("/signup");
+    navigate("/signin");
   };
+
+  const handleSubmit = () => {
+    console.log('fffff');
+  }
+
   return (
     <div className="signin">
       <Grid
@@ -28,11 +32,9 @@ const SignIn = () => {
       >
         <Grid item sx={6} sm={5} md={3}>
           <Paper elevation={10} className="paper">
-            <Grid align="center">
-              <Avatar style={{ backgroundColor: "#38b474" }}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <h2>Se connecter</h2>
+            <Grid align="center" style={{marginTop:"30px"}}>
+              <img src={logoCGI} alt="logoCGI" width={'60px'}/>
+              <h2>Créer un compte</h2>
             </Grid>
             <TextField
               style={{ margin: "1em auto 2em" }}
@@ -53,28 +55,20 @@ const SignIn = () => {
               fullWidth
             />
 
-            <FormControlLabel
-              control={<Checkbox name="checkedB" color="primary" />}
-              label="Se souvenir de moi"
-            />
-
             <Button
               style={{ margin: "20px 0" }}
               type="submit"
               color="primary"
               fullWidth
               variant="contained"
+              onClick={handleSubmit()}
             >
-              Se connecter
+              Registre
             </Button>
-
-            <Typography style={{ marginBottom: "1em" }}>
-              <Link href="#">Mot de passe oublié?</Link>
-            </Typography>
 
             <Typography>
               {" "}
-              Avez-vous un compte ? <Link onClick={handleLinkClick} to="/signup">S'inscrire</Link>
+              Je suis déjà membre ? <Link onClick={handleLinkClick}>Se connecter</Link>
             </Typography>
           </Paper>
         </Grid>
@@ -83,4 +77,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
