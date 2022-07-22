@@ -4,10 +4,13 @@ import SignIn from "./Components/Signin";
 import SignUp from "./Components/Signup";
 import Users from "./Components/Users";
 import { Route, Routes, Navigate } from "react-router-dom";
-// -- Component Styles
-// import "./Styles/app.scss";
+import { useSelector } from "react-redux";
+
 
 function App() {
+  const { userAuth } = useSelector(({ authReducer }) => authReducer);
+
+  console.log("rrrr", userAuth);
   return (
     <div className="App">
       <Routes>

@@ -22,13 +22,14 @@ import IconButton from "@material-ui/core/IconButton";
 import { onRegister } from "../../Redux/Actions/JWTAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { AlertComponent } from "../CommunComponents/AlertComponent";
+import PageLoader from "../CommunComponents/PageLoader"
 
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
 
-  const { status } = useSelector(({ alertReducer }) => alertReducer);
+  const { status, loading } = useSelector(({ alertReducer }) => alertReducer);
 
 
   const handleLinkClick = () => {
@@ -82,6 +83,7 @@ const SignUp = () => {
               <img src={logoCGI} alt="logoCGI" width={"60px"} />
               <h2>Créer un compte</h2>
             </Grid>
+            {loading && <PageLoader />}
             {status && <AlertComponent />}
             <TextField
               style={{ margin: "1em auto 2em" }}
