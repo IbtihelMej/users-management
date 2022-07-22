@@ -6,13 +6,12 @@ import { hideMessage } from "../../Redux/Actions/Alert";
 
 export const AlertComponent = () => {
   const dispatch = useDispatch();
-  const { alert, loading } = useSelector(({ alertReducer }) => alertReducer);
+  const { alert } = useSelector(({ alertReducer }) => alertReducer);
   useEffect(() => {
     setTimeout(() => {
       dispatch(hideMessage());
     }, 5000);
   }, [dispatch]);
-console.log("loading", loading);
   return (
     <div>
       {" "}

@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const Users = (state = initialState, action) => {
-
+console.log('actionaction',action);
   if (action.type === SIGNIN_USER_SUCCESS) {
     return Object.assign({}, state, {
       userAuth: action.payload,

@@ -39,7 +39,6 @@ export const onLogin = (dataAuth) => {
       .post("/login", dataAuth)
       .then(({ data }) => {
         if (data) {
-          console.log("data login", data);
           localStorage.setItem("kfdsa3UQ71V", data.token);
           dispatch({
             type: SHOW_MESSAGE,

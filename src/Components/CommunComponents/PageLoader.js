@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
 
 const PageLoader = () => {
   const classes = useStyles();
-console.log('PageLoaderPageLoader');
   return (
     <Box className={classes.circularProgressRoot}>
       <CircularProgress />
