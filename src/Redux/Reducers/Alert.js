@@ -1,8 +1,13 @@
-import { SHOW_MESSAGE, HIDE_MESSAGE } from "../../Constants/ActionTypes";
+import {
+  SHOW_MESSAGE,
+  HIDE_MESSAGE,
+  FETCH_START,
+} from "../../Constants/ActionTypes";
 
 const initialState = {
   alert: "",
   status: false,
+  loading: false,
 };
 
 const Alert = (state = initialState, action) => {
@@ -10,6 +15,7 @@ const Alert = (state = initialState, action) => {
     return Object.assign({}, state, {
       alert: action.payload,
       status: true,
+      loading: false,
     });
   }
 
@@ -17,6 +23,11 @@ const Alert = (state = initialState, action) => {
     return Object.assign({}, state, {
       alert: action.payload,
       status: false,
+    });
+  }
+  if (action.type === FETCH_START) {
+    return Object.assign({}, state, {
+      loading: true,
     });
   }
 
