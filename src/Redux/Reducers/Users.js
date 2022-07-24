@@ -3,6 +3,10 @@ const initialState = {
     { id: 1, title: "post 1", body: "Quisque cursus, metus vitae pharetra" },
     { id: 2, title: "post 2", body: "Quisque cursus, metus vitae pharetra" },
   ],
+  levels: [
+    { id: 1, title: "post 1", body: "Quisque cursus, metus vitae pharetra" },
+    { id: 2, title: "post 2", body: "Quisque cursus, metus vitae pharetra" },
+  ],
 };
 
 const Users = (state = initialState, action) => {
