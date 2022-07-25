@@ -13,7 +13,6 @@ import {
 } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import { makeStyles } from "@material-ui/core/styles";
-// import imageCarte from "../../Assets/detail.png";
 import _ from "lodash";
 import { getUsers } from "../../Redux/Actions/Users";
 
@@ -93,7 +92,12 @@ const DetailsUser = () => {
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                  <mark>  <em><b>Identifiant : {id}</b></em></mark>  
+                    <mark>
+                      {" "}
+                      <em>
+                        <b>Identifiant : {id}</b>
+                      </em>
+                    </mark>
                   </Typography>
                   <Typography
                     variant="body2"
@@ -107,7 +111,7 @@ const DetailsUser = () => {
                     color="textSecondary"
                     component="p"
                   >
-                   <b>Prénom :</b>  {userSelected?.first_name}
+                    <b>Prénom :</b> {userSelected?.first_name}
                   </Typography>
                   <Typography
                     variant="body2"
@@ -120,7 +124,7 @@ const DetailsUser = () => {
                     component="p"
                   >
                     <b> Email : </b>
-                   {userSelected?.email}
+                    {userSelected?.email}
                   </Typography>
                 </CardContent>
               </CardActionArea>

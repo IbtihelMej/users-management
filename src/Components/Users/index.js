@@ -15,18 +15,19 @@ import { withStyles } from "@material-ui/core/styles";
 import Navbar from "../Navbar/Navbar";
 import { Visibility } from "@material-ui/icons";
 import AddUser from "./AddUser";
-import { getUsers } from "../../Redux/Actions/Users";
+import { getUsers, addUser } from "../../Redux/Actions/Users";
 import { useDispatch, useSelector } from "react-redux";
+import AddIcon from "@material-ui/icons/Add";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: "#ede7f6",
     color: theme.palette.common.black,
-    textAlign: "center"
+    textAlign: "center",
   },
   body: {
     fontSize: 14,
-    textAlign: "center"
+    textAlign: "center",
   },
 }))(TableCell);
 
@@ -43,6 +44,7 @@ const AccountManagement = () => {
   const navigate = useNavigate();
 
   const { users } = useSelector(({ userReducer }) => userReducer);
+  const { status, loading } = useSelector(({ alertReducer }) => alertReducer);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -61,6 +63,13 @@ const AccountManagement = () => {
     navigate(`/app/user/details/${row.id}`);
   };
 
+  const onSubmitData = (data) => {
+    const lengthListUser = users.length
+    dispatch(addUser(data, lengthListUser));
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 5000);
+  };
   return (
     <div>
       <Navbar />
@@ -79,7 +88,12 @@ const AccountManagement = () => {
           direction="column"
           alignItems="flex-end"
         >
-          <Button variant="contained" color="primary" onClick={handleOpen}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleOpen}
+            startIcon={<AddIcon />}
+          >
             Ajouter un nouveau utilisateur
           </Button>
         </Grid>
@@ -121,7 +135,15 @@ const AccountManagement = () => {
           </TableContainer>
         </Grid>
       </Grid>
-      {isOpen && <AddUser open={isOpen} handleClose={handleClose} />}
+      {isOpen && (
+        <AddUser
+          open={isOpen}
+          handleClose={handleClose}
+          onSubmitData={onSubmitData}
+          status={status}
+          loading={loading}
+        />
+      )}
     </div>
   );
 };
