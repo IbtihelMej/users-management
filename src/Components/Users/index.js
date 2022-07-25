@@ -10,8 +10,8 @@ import {
   TableBody,
   TableHead,
 } from "@material-ui/core";
-
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { useNavigate } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
 import Navbar from "../Navbar/Navbar";
 import { Visibility } from "@material-ui/icons";
 import AddUser from "./AddUser";
@@ -39,15 +39,11 @@ const StyledTableRow = withStyles((theme) => ({
 
 
 
-const useStyles = makeStyles({
-  // table: {
-  //   minWidth: 700,
-  // },
-});
 
 const AccountManagement = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { users } = useSelector(({ userReducer }) => userReducer);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -62,14 +58,16 @@ const AccountManagement = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
+  const handleDetails = () => {
+    navigate("/app/user/details");
+
+  }
   console.log('usersusers',users.data);
   return (
     <div>
       <Navbar />
-
       <Grid
         container
-        // style={{ borderStyle: "dashed", borderColor: "red" }}
         direction="column"
         justifyContent="flex-start"
         alignItems="stretch"
@@ -89,7 +87,7 @@ const AccountManagement = () => {
         </Grid>
         <Grid item style={{ padding: "5%" }}>
           <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
+            <Table  aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Email</StyledTableCell>
@@ -103,7 +101,7 @@ const AccountManagement = () => {
                       {row.email}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <Button color="primary" startIcon={<Visibility />}>
+                      <Button color="primary" startIcon={<Visibility />} onClick={handleDetails}>
                         Consulter
                       </Button>
                     </StyledTableCell>

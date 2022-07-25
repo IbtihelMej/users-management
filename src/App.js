@@ -3,6 +3,7 @@ import "./App.css";
 import SignIn from "./Components/Signin";
 import SignUp from "./Components/Signup";
 import Users from "./Components/Users";
+import DetailsUser from "./Components/Users/DetailsUser";
 import { Route, Routes, Navigate , useNavigate, useLocation} from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -23,6 +24,9 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/app/users" element={<Users />} />
+        <Route path="/app/user/details" element={<DetailsUser />} />
+
+        
       </Routes>
     </div>
   );
