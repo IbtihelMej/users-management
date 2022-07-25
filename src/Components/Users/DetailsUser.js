@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Grid,
   Button,
@@ -12,11 +13,14 @@ import {
 } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import { makeStyles } from "@material-ui/core/styles";
+// import imageCarte from "../../Assets/detail.png";
+import _ from "lodash";
+import { getUsers } from "../../Redux/Actions/Users";
 
-import imageCarte from "../../Assets/detail.png";
 const useStyles = makeStyles({
   root: {
-    maxWidth: 445,
+    maxWidth: "50%",
+    minWidth: "35%",
   },
   media: {
     height: 350,
@@ -25,7 +29,19 @@ const useStyles = makeStyles({
 
 const DetailsUser = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { users } = useSelector(({ userReducer }) => userReducer);
+  const [userSelected, setUserSelected] = useState({});
   const classes = useStyles();
+  let { id } = useParams();
+
+  useEffect(() => {
+    if (_.isEmpty(users)) {
+      dispatch(getUsers());
+    }
+    const detailUser = users.find((element) => element.id === parseInt(id));
+    setUserSelected(detailUser);
+  }, [users, id, dispatch]);
 
   const handleBackUsers = () => {
     navigate("/app/users");
@@ -59,32 +75,57 @@ const DetailsUser = () => {
         </Grid>
         <Grid
           container
-          item
           style={{
             padding: "3%",
           }}
           justifyContent="center"
           alignItems="center"
         >
-          <Card className={classes.root}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={imageCarte}
-                title="Contemplative Reptile"
-                src="picture"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+          <Grid item xs={12} sm={8} md={4}>
+            <Card>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  // image={imageCarte}
+                  image={userSelected?.avatar}
+                  title="Contemplative Reptile"
+                  src="picture"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                  <mark>  <em><b>Identifiant : {id}</b></em></mark>  
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    <b>Nom :</b> {userSelected?.last_name}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                   <b>Prénom :</b>  {userSelected?.first_name}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  ></Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    <b> Email : </b>
+                   {userSelected?.email}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
         </Grid>
       </Grid>
     </div>

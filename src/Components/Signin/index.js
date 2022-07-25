@@ -73,8 +73,11 @@ const SignIn = () => {
         direction="column"
         alignItems="center"
         justifyContent="center"
+        style={{
+          padding: "3%",
+        }}
       >
-        <Grid item sx={6} sm={5} md={3}>
+        <Grid item xs={12} sm={8} md={3}>
           <Paper elevation={10} className="paper">
             <Grid align="center">
               <Avatar style={{ backgroundColor: "#38b474" }}>

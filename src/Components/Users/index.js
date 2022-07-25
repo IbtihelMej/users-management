@@ -15,17 +15,18 @@ import { withStyles } from "@material-ui/core/styles";
 import Navbar from "../Navbar/Navbar";
 import { Visibility } from "@material-ui/icons";
 import AddUser from "./AddUser";
-import {getUsers} from "../../Redux/Actions/Users";
+import { getUsers } from "../../Redux/Actions/Users";
 import { useDispatch, useSelector } from "react-redux";
-
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: "#ede7f6",
+    color: theme.palette.common.black,
+    textAlign: "center"
   },
   body: {
     fontSize: 14,
+    textAlign: "center"
   },
 }))(TableCell);
 
@@ -36,9 +37,6 @@ const StyledTableRow = withStyles((theme) => ({
     },
   },
 }))(TableRow);
-
-
-
 
 const AccountManagement = () => {
   const dispatch = useDispatch();
@@ -58,11 +56,11 @@ const AccountManagement = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
-  const handleDetails = () => {
-    navigate("/app/user/details");
+  const handleDetails = (e, row) => {
+    e.preventDefault();
+    navigate(`/app/user/details/${row.id}`);
+  };
 
-  }
-  console.log('usersusers',users.data);
   return (
     <div>
       <Navbar />
@@ -76,7 +74,7 @@ const AccountManagement = () => {
           container
           item
           style={{
-            padding: "5%"
+            padding: "3%",
           }}
           direction="column"
           alignItems="flex-end"
@@ -85,9 +83,9 @@ const AccountManagement = () => {
             Ajouter un nouveau utilisateur
           </Button>
         </Grid>
-        <Grid item style={{ padding: "5%" }}>
+        <Grid item style={{ padding: "3%" }}>
           <TableContainer component={Paper}>
-            <Table  aria-label="customized table">
+            <Table aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Email</StyledTableCell>
@@ -101,7 +99,18 @@ const AccountManagement = () => {
                       {row.email}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <Button color="primary" startIcon={<Visibility />} onClick={handleDetails}>
+                      <Button
+                        startIcon={<Visibility style={{ color: "#5B13B4" }} />}
+                        onClick={(e) => handleDetails(e, row)}
+                        style={{
+                          color: "#5B13B4",
+                          borderColor: "#5B13B4",
+                          "&:hover": {
+                            borderColor: "#6F13DA",
+                            color: "#6F13DA",
+                          },
+                        }}
+                      >
                         Consulter
                       </Button>
                     </StyledTableCell>
