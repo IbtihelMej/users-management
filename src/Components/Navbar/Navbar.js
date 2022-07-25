@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
-import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
+import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,31 +27,35 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+const onLogout = () => {
+  localStorage.removeItem("kfdsa3UQ71V");
+  window.location.href = "/signin";
+};
 
 export default function Navbar() {
   const classes = useStyles();
 
   return (
-   
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <PeopleAltOutlinedIcon />
-          </IconButton>
-           <Typography variant="h6" className={classes.title}>
-            <Link to="/app/users" className={classes.link}>
-              Gestion des utiisateurs
-            </Link>
-          </Typography>
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="menu"
+        >
+          <PeopleAltOutlinedIcon />
+        </IconButton>
+        <Typography variant="h6" className={classes.title}>
+          <Link to="/app/users" className={classes.link}>
+            Gestion des utiisateurs
+          </Link>
+        </Typography>
 
-          <Button color="inherit">Se déconnecter</Button>
-        </Toolbar>
-      </AppBar>
-    
+        <Button color="inherit" onClick={onLogout}>
+          Se déconnecter
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 }
