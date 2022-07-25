@@ -11,4 +11,5 @@ export const SIGNIN_USER_ERROR = "signin_user_error";
 
 
 
+export const GET_USERS = "get_users";
 

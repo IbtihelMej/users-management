@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Paper,
   Table,
@@ -14,7 +14,10 @@ import {
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Navbar from "../Navbar/Navbar";
 import { Visibility } from "@material-ui/icons";
-import  AddUser from "./AddUser"
+import AddUser from "./AddUser";
+import {getUsers} from "../../Redux/Actions/Users";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -34,37 +37,32 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
+  // table: {
+  //   minWidth: 700,
+  // },
 });
 
 const AccountManagement = () => {
   const classes = useStyles();
-const [isOpen, setIsOpen] = useState(false)
+  const dispatch = useDispatch();
+  const { users } = useSelector(({ userReducer }) => userReducer);
 
-const handleOpen = () => {
-  console.log('handleOpen');
-  setIsOpen(true)
-}
-const handleClose = () => {
-  console.log('handleClose');
-  setIsOpen(false);
-};
-console.log('isOpen',isOpen);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  console.log('usersusers',users.data);
   return (
     <div>
       <Navbar />
@@ -80,9 +78,7 @@ console.log('isOpen',isOpen);
           container
           item
           style={{
-            // borderStyle: "dashed",
-            // borderColor: "yellow",
-            padding: "50px",
+            padding: "5%"
           }}
           direction="column"
           alignItems="flex-end"
@@ -91,7 +87,7 @@ console.log('isOpen',isOpen);
             Ajouter un nouveau utilisateur
           </Button>
         </Grid>
-        <Grid item style={{ padding: "50px" }}>
+        <Grid item style={{ padding: "5%" }}>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
@@ -101,10 +97,10 @@ console.log('isOpen',isOpen);
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
+                {users.map((row) => (
+                  <StyledTableRow key={row.id}>
                     <StyledTableCell component="th" scope="row">
-                      {row.name}
+                      {row.email}
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       <Button color="primary" startIcon={<Visibility />}>
