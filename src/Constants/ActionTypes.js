@@ -10,7 +10,9 @@ export const SIGNUP_USER_ERROR = "signup_user_error";
 export const SIGNIN_USER_ERROR = "signin_user_error";
 
 
-
 export const GET_USERS = "get_users";
 export const ADD_USER = "add_user";
+export const ADD_SUBSCRIPTION = "add_subscription";
+export const DELETE_SUBSCRIPTION = "delete_subscription";
+
 
