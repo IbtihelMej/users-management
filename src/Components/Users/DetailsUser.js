@@ -16,7 +16,6 @@ import _ from "lodash";
 import { getUsers } from "../../Redux/Actions/Users";
 import useStyles from "../../Styles/TypoStyle";
 
-
 const DetailsUser = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -81,25 +80,20 @@ const DetailsUser = () => {
                   src="picture"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2" className={classes.dialogTitleRoot}>
-                  
-                      <em>
-                        <b>Identifiant : {id}</b>
-                      </em>
-                    
-                  </Typography>
                   <Typography
-                    variant="body2"
-                    color="primary"
-                    component="p"
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                    className={classes.dialogTitleRoot}
                   >
+                    <em>
+                      <b>Identifiant : {id}</b>
+                    </em>
+                  </Typography>
+                  <Typography variant="body2" color="primary" component="p">
                     <b>Nom :</b> {userSelected?.last_name}
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    color="primary"
-                    component="p"
-                  >
+                  <Typography variant="body2" color="primary" component="p">
                     <b>Prénom :</b> {userSelected?.first_name}
                   </Typography>
                   <Typography
@@ -107,11 +101,7 @@ const DetailsUser = () => {
                     color="primary"
                     component="p"
                   ></Typography>
-                  <Typography
-                    variant="body2"
-                    color="primary"
-                    component="p"
-                  >
+                  <Typography variant="body2" color="primary" component="p">
                     <b> Email : </b>
                     {userSelected?.email}
                   </Typography>

@@ -16,7 +16,6 @@ import PageLoader from "../CommunComponents/PageLoader";
 import { AlertComponent } from "../CommunComponents/AlertComponent";
 import useStyles from "../../Styles/TypoStyle";
 
-
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -87,7 +86,11 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
         fullWidth={true}
         maxWidth="sm"
       >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialogTitleRoot}>
+        <DialogTitle
+          id="customized-dialog-title"
+          onClose={handleClose}
+          className={classes.dialogTitleRoot}
+        >
           Ajouter un nouveau utilisateur{" "}
         </DialogTitle>
         <DialogContent dividers>
@@ -188,7 +191,12 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} variant="contained" className={classes.cancelButton}>
+          <Button
+            autoFocus
+            onClick={handleClose}
+            variant="contained"
+            className={classes.cancelButton}
+          >
             Annuler
           </Button>
           <Button

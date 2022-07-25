@@ -17,7 +17,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log("userAuth", userAuth);
   if (userAuth && location.pathname === "/signin") {
     navigate("/app/users");
   }

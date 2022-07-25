@@ -4,7 +4,7 @@ import {
   FETCH_START,
   SIGNIN_USER_SUCCESS,
   ADD_SUBSCRIPTION,
-  DELETE_SUBSCRIPTION
+  DELETE_SUBSCRIPTION,
 } from "../../Constants/ActionTypes";
 
 export const onRegister = (dataAuth) => {
