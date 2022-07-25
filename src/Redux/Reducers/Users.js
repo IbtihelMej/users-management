@@ -1,16 +1,22 @@
+import { GET_USERS, ADD_USER } from "../../Constants/ActionTypes";
+
 const initialState = {
-  users: [
-    { id: 1, title: "post 1", body: "Quisque cursus, metus vitae pharetra" },
-    { id: 2, title: "post 2", body: "Quisque cursus, metus vitae pharetra" },
-  ],
+  users: [],
 };
 
 const Users = (state = initialState, action) => {
-  if (action.type === "GET_USER") {
+  if (action.type === GET_USERS) {
     return Object.assign({}, state, {
-      users: action.payload,
+      users: action.payload.data,
+    });
+  }
+  if (action.type === ADD_USER) {
+    return Object.assign({}, state, {
+      users: [action.payload, ...state.users],
     });
   }
   return state;
 };
 export default Users;
+
+

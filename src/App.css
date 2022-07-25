@@ -15,7 +15,7 @@
 
 
 .signin {
-  background-image: url("backgroundApp.png");
+  background-image: url("./Assets/backgroundApp.png");
   background-size: cover;
   min-height: 100vh;
   display: flex;
