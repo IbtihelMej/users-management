@@ -12,19 +12,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
-import { makeStyles } from "@material-ui/core/styles";
 import _ from "lodash";
 import { getUsers } from "../../Redux/Actions/Users";
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: "50%",
-    minWidth: "35%",
-  },
-  media: {
-    height: 350,
-  },
-});
+import useStyles from "../../Styles/TypoStyle";
 
 const DetailsUser = () => {
   const navigate = useNavigate();
@@ -85,44 +75,33 @@ const DetailsUser = () => {
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  // image={imageCarte}
                   image={userSelected?.avatar}
-                  title="Contemplative Reptile"
+                  title="avatar user"
                   src="picture"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    <mark>
-                      {" "}
-                      <em>
-                        <b>Identifiant : {id}</b>
-                      </em>
-                    </mark>
-                  </Typography>
                   <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                    className={classes.dialogTitleRoot}
                   >
+                    <em>
+                      <b>Identifiant : {id}</b>
+                    </em>
+                  </Typography>
+                  <Typography variant="body2" color="primary" component="p">
                     <b>Nom :</b> {userSelected?.last_name}
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
+                  <Typography variant="body2" color="primary" component="p">
                     <b>Prénom :</b> {userSelected?.first_name}
                   </Typography>
                   <Typography
                     variant="body2"
-                    color="textSecondary"
+                    color="primary"
                     component="p"
                   ></Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
+                  <Typography variant="body2" color="primary" component="p">
                     <b> Email : </b>
                     {userSelected?.email}
                   </Typography>

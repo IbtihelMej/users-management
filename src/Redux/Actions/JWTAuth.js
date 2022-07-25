@@ -1,5 +1,11 @@
 import axios from "../../Config";
-import { SHOW_MESSAGE, FETCH_START, SIGNIN_USER_SUCCESS } from "../../Constants/ActionTypes";
+import {
+  SHOW_MESSAGE,
+  FETCH_START,
+  SIGNIN_USER_SUCCESS,
+  ADD_SUBSCRIPTION,
+  DELETE_SUBSCRIPTION,
+} from "../../Constants/ActionTypes";
 
 export const onRegister = (dataAuth) => {
   return (dispatch) => {
@@ -44,9 +50,11 @@ export const onLogin = (dataAuth) => {
             type: SHOW_MESSAGE,
             payload: {},
           });
+          let dataStore = { token: data.token, ...dataAuth };
+          localStorage.setItem("OOPgtd563", dataAuth.password);
           dispatch({
             type: SIGNIN_USER_SUCCESS,
-            payload:  data.token,
+            payload: dataStore,
           });
         }
       })
@@ -67,6 +75,24 @@ export const fetchStart = () => {
   return (dispatch) => {
     dispatch({
       type: FETCH_START,
+    });
+  };
+};
+
+export const addSubscription = () => {
+  return (dispatch) => {
+    localStorage.setItem("pZot34sc1V", true);
+    dispatch({
+      type: ADD_SUBSCRIPTION,
+    });
+  };
+};
+
+export const deleteSubscription = () => {
+  return (dispatch) => {
+    localStorage.setItem("pZot34sc1V", false);
+    dispatch({
+      type: DELETE_SUBSCRIPTION,
     });
   };
 };

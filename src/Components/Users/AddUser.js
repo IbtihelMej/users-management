@@ -14,6 +14,7 @@ import { requiredMessage, emailNotValid } from "../../Constants/ErrorMessages";
 import { isValidEmail } from "../../Validation";
 import PageLoader from "../CommunComponents/PageLoader";
 import { AlertComponent } from "../CommunComponents/AlertComponent";
+import useStyles from "../../Styles/TypoStyle";
 
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
@@ -54,6 +55,7 @@ const initialUser = {
 };
 
 const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
+  const classes = useStyles();
   const [user, setUser] = useState(initialUser);
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
@@ -84,7 +86,11 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
         fullWidth={true}
         maxWidth="sm"
       >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <DialogTitle
+          id="customized-dialog-title"
+          onClose={handleClose}
+          className={classes.dialogTitleRoot}
+        >
           Ajouter un nouveau utilisateur{" "}
         </DialogTitle>
         <DialogContent dividers>
@@ -97,6 +103,7 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
             <Grid item xs={12} sm={6} md={6}>
               <TextField
                 required
+                className={classes.textFieldStyle}
                 fullWidth
                 id="lastName"
                 name="lastName"
@@ -117,6 +124,7 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
             <Grid item xs={12} sm={6} md={6}>
               <TextField
                 required
+                className={classes.textFieldStyle}
                 fullWidth
                 id="firstName"
                 name="firstName"
@@ -140,6 +148,7 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
               <TextField
                 fullWidth
                 id="email"
+                className={classes.textFieldStyle}
                 name="email"
                 label="Email"
                 variant="outlined"
@@ -159,6 +168,7 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
             <Grid item xs={12} sm={6} md={6}>
               <TextField
                 required
+                className={classes.textFieldStyle}
                 fullWidth
                 id="job"
                 name="job"
@@ -181,7 +191,12 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} variant="contained">
+          <Button
+            autoFocus
+            onClick={handleClose}
+            variant="contained"
+            className={classes.cancelButton}
+          >
             Annuler
           </Button>
           <Button
@@ -190,6 +205,7 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
             variant="contained"
             color="primary"
             onClick={handleSubmit}
+            className={classes.saveButton}
           >
             Ajouter
           </Button>
