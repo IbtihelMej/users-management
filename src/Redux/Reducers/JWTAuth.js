@@ -1,7 +1,7 @@
 import { SIGNIN_USER_SUCCESS } from "../../Constants/ActionTypes";
 
 const initialState = {
-  userAuth: "",
+  userAuth: localStorage.getItem("kfdsa3UQ71V"),
 };
 
 const Users = (state = initialState, action) => {
