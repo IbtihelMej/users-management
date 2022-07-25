@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Paper,
   Table,
@@ -14,7 +14,7 @@ import {
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Navbar from "../Navbar/Navbar";
 import { Visibility } from "@material-ui/icons";
-
+import  AddUser from "./AddUser"
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -54,7 +54,17 @@ const useStyles = makeStyles({
 
 const AccountManagement = () => {
   const classes = useStyles();
+const [isOpen, setIsOpen] = useState(false)
 
+const handleOpen = () => {
+  console.log('handleOpen');
+  setIsOpen(true)
+}
+const handleClose = () => {
+  console.log('handleClose');
+  setIsOpen(false);
+};
+console.log('isOpen',isOpen);
   return (
     <div>
       <Navbar />
@@ -77,7 +87,7 @@ const AccountManagement = () => {
           direction="column"
           alignItems="flex-end"
         >
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={handleOpen}>
             Ajouter un nouveau utilisateur
           </Button>
         </Grid>
@@ -88,9 +98,6 @@ const AccountManagement = () => {
                 <TableRow>
                   <StyledTableCell>Email</StyledTableCell>
                   <StyledTableCell align="right">Action</StyledTableCell>
-                  {/* <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -104,9 +111,6 @@ const AccountManagement = () => {
                         Consulter
                       </Button>
                     </StyledTableCell>
-                    {/* <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell> */}
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -114,8 +118,7 @@ const AccountManagement = () => {
           </TableContainer>
         </Grid>
       </Grid>
-
-
+      {isOpen && <AddUser open={isOpen} handleClose={handleClose} />}
     </div>
   );
 };
