@@ -146,6 +146,7 @@ const AddUser = ({ open, handleClose, onSubmitData, status, loading }) => {
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
               <TextField
+                required
                 fullWidth
                 id="email"
                 className={classes.textFieldStyle}
